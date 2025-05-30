@@ -88,7 +88,7 @@ def _normalize(data, mode='max'):
 # In[ ]:
 
 
-df=pd.read_excel('G:\Article3\data\Absorption.xlsx', header=None)   # import dataset
+df=pd.read_excel('', header=None)   # import dataset
 
 print(df.shape[0])
 
@@ -290,12 +290,11 @@ print(layer_biases)
 # ------------------------End of the code------------------------#
 
 
-pre_A0 = pd.read_excel('G:\Article3\data\Pre.xlsx', header=None)
+pre_A0 = pd.read_excel(' ', header=None)
 
 preX = np.array(pre_A0)
-preY = _normalize(preX, mode='max')
-preZ = np.reshape(preY, (1, 71, 1))
-preC = model.predict(preZ)
+preY = np.reshape(preX, (1, 71, 1))
+preC = model.predict(preY)
 print('this is structure parameters')
 print(preC)
 
