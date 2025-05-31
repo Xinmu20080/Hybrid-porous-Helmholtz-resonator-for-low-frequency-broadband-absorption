@@ -65,22 +65,31 @@ lr_schedule = tf.keras.callbacks.LearningRateScheduler(
 
 # In[ ]:
 
-
 def _normalize(data, mode='max'):
 
-    data -= np.mean(data, axis=0, keepdims=True)
+    mean = np.mean(data, axis=0, keepdims=True)
+    data = data - mean  
+
+
     if mode == 'max':
-        max_data = np.max(data, axis=0, keepdims=True)
-        assert (max_data.shape[-1] == data.shape[-1])
-        max_data[max_data == 0] = 1
-        data /= max_data
+
+        denominator = np.max(data, axis=0, keepdims=True)
+        assert denominator.shape[-1] == data.shape[-1]
+        denominator[denominator == 0] = 1  
+        data = data / denominator
 
     elif mode == 'std':
-        std_data = np.std(data, axis=0, keepdims=True)
-        assert (std_data.shape[-1] == data.shape[-1])
-        std_data[std_data == 0] = 1
-        data /= std_data
-    return data
+
+        denominator = np.std(data, axis=0, keepdims=True)
+        assert denominator.shape[-1] == data.shape[-1]
+        denominator[denominator == 0] = 1 
+        data = data / denominator
+
+    else:
+        raise ValueError(f"Unsupported mode: {mode}. Choose 'max' or 'std'")
+
+
+    return data, mean, denominator
 
 
 # ## Importing data
@@ -106,7 +115,7 @@ X = np.array(X1)
 # In[ ]:
 
 
-X = _normalize(X, mode='max')
+X, mean, std_vals = _normalize(X, mode='max')
 print(X.shape)
 
 # In[ ]:
@@ -293,8 +302,9 @@ print(layer_biases)
 pre_A0 = pd.read_excel(' ', header=None)
 
 preX = np.array(pre_A0)
-preY = np.reshape(preX, (1, 71, 1))
-preC = model.predict(preY)
+preY=(preX-mean)/std_vals
+preZ = np.reshape(preY, (1, 71, 1))
+preC = model.predict(preZ)
 print('this is structure parameters')
 print(preC)
 
