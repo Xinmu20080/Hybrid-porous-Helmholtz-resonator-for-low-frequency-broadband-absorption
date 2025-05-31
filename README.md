@@ -13,7 +13,7 @@ Enhanced Clarity: Documentation and in-code comments have been significantly imp
 Improved User Experience: The overall process of setting up and running the code is now more intuitive and user-friendly.
 
 A Critical Observation:
-It is worth noting that even with these improvements, the probability of obtaining valid parameters through this code remains low (typically <5% in our tests). This outcome invites deeper reflection:
+It is worth noting that even with these improvements, the probability of obtaining valid parameters through this code remains low. This outcome invites deeper reflection:
 
 Does the limited success rate challenge the reliability of traditional ML/DL methods in physical sciences?
 
