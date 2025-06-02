@@ -12,6 +12,9 @@ Enhanced Clarity: Documentation and in-code comments have been significantly imp
 
 Improved User Experience: The overall process of setting up and running the code is now more intuitive and user-friendly.
 
+Version 2 includes a corrected data normalization method. 
+This may affect training dynamics; users may need to re-tune hyperparameters for optimal performance.
+
 A Critical Observation:
 It is worth noting that even with these improvements, the probability of obtaining valid parameters through this code remains low. This outcome invites deeper reflection:
 
