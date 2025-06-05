@@ -112,11 +112,6 @@ print(X1)
 df_S=df.iloc[:, 0:4]
 X = np.array(X1)
 
-# In[ ]:
-
-
-X, mean, std_vals = _normalize(X, mode='max')
-print(X.shape)
 
 # In[ ]:
 
@@ -134,7 +129,10 @@ y = np.array(y)
 
 # split into train and test
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=83, shuffle=True)
-X_valid = X_test
+X_train, mean, std_vals = _normalize(X_train, mode='max')
+print(X.shape)
+
+X_valid = (X_test-mean)/std_vals
 y_valid = y_test
 
 # In[ ]:
